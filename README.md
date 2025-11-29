@@ -25,6 +25,7 @@ list - lists the current task list
 list-done - lists all the tasks that have been completed
 list-not-done - lists all of the tasks that have not been completed.
 list-in-progress - lists all the tasks currently been done.
+help - displays this list of commands
 
 ```
 
@@ -33,7 +34,7 @@ list-in-progress - lists all the tasks currently been done.
 TASK-TRACKER/
   task_cli.py
   data/
-    tasks.json  # created automatically while running
+    tasks.json  # created automatically while running program
   taskmanager/
     __init__.py
     storage.py
