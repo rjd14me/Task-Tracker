@@ -1,11 +1,18 @@
 import argparse
 import sys
+from datetime import datetime
 
 from taskmanager.manage import add_task, update_task, delete_task, mark_done, mark_in_progress, list_tasks
 
 
 def format_task(task):
-    creation_date = task.get("creation_date", "Unknown")
+    creation_date_raw = task.get("creation_date")
+    creation_date = "Unknown"
+    if creation_date_raw:
+        try:
+            creation_date = datetime.fromisoformat(creation_date_raw).strftime("%d/%m/%Y")
+        except ValueError:
+            creation_date = creation_date_raw
     status = task.get("status", "To Do")
     return f"{task['id']}: {status} - {task['description']} (Created: {creation_date})"
 
