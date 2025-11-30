@@ -13,13 +13,28 @@ def format_task(task):
             creation_date = datetime.fromisoformat(creation_date_raw).strftime("%d/%m/%Y")
         except ValueError:
             creation_date = creation_date_raw
+    due_date = task.get("due_date", "No Due Date")
     status = task.get("status", "To Do")
-    return f"{task['id']}: {status} - {task['description']} (Created: {creation_date})"
+    return f"{task['id']}: {status} - {task['description']} (Created: {creation_date}, Due: {due_date})"
+
+
+def prompt_due_date():
+    raw = input("Enter Due Date (DD/MM/YYYY) or press Enter for 'No Due Date': ").strip()
+    if not raw:
+        return "No Due Date"
+    try:
+        # Validate and normalize format.
+        parsed = datetime.strptime(raw, "%d/%m/%Y")
+        return parsed.strftime("%d/%m/%Y")
+    except ValueError:
+        print("Invalid date format. Please use DD/MM/YYYY. Leaving as 'No Due Date'.")
+        return "No Due Date"
 
 
 def cmd_add(args):
     description = " ".join(args.description)
-    add_task(description)
+    due_date = prompt_due_date()
+    add_task(description, due_date)
     print("Task added.")
     return 0
 
@@ -156,7 +171,9 @@ def run_prompt():
             if not args:
                 print("Need a description.")
                 continue
-            add_task(" ".join(args))
+            description = " ".join(args)
+            due_date = prompt_due_date()
+            add_task(description, due_date)
             print("Task added.")
         elif cmd == "update":
             if len(args) < 2:

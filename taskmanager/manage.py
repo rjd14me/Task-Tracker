@@ -2,10 +2,10 @@ from .storage import load_tasks, save_tasks, generate_new_id
 from .models import Task
 
 
-def add_task(description):
+def add_task(description, due_date="No Due Date"):
     tasks = load_tasks()
     new_id = generate_new_id(tasks)
-    task = Task(id=new_id, description=description)
+    task = Task(id=new_id, description=description, due_date=due_date)
     tasks.append(task.to_dict())
     save_tasks(tasks)
 

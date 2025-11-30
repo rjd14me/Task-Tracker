@@ -1,4 +1,4 @@
-# FlowTask (v1.3)
+# FlowTask (v1.4)
 My personal solution to the [Task Tracker](https://roadmap.sh/projects/task-tracker) problem on [Roadmap.sh](https://roadmap.sh/dashboard).
 
 # How to Demo
@@ -20,6 +20,7 @@ command> help #to see all commands
 - List tasks with optional status filtering (todo, in-progress, done)
 - JSON storage in `data/tasks.json`
 - Track the date the tasks were added (DD/MM/YYYY).
+- Allow users to input a due by date, no defaulting to no due date if no input
 
 ## Key skills demonstrated
 - Command-line UX: argparse subcommands plus an interactive REPL prompt.
